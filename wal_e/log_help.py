@@ -66,8 +66,9 @@ def configure(*args, **kwargs):
     if len(logging.root.handlers) == 0:
         filename = kwargs.get("filename")
         if filename:
-            mode = kwargs.get("filemode", 'a')
-            handlers.append(logging.FileHandler(filename, mode))
+            maxBytes = kwargs.get("maxBytes", 10*1024*1024)
+            backupCount = kwargs.get("backupCount", 100)
+            handlers.append(logging.handlers.RotatingFileHandler(filename, maxBytes=maxBytes, backupCount=backupCount))
         else:
             stream = kwargs.get("stream")
             handlers.append(logging.StreamHandler(stream))

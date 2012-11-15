@@ -37,6 +37,7 @@ from wal_e.worker.pg_controldata_worker import CONFIG_BIN, PgControlDataParser
 
 # TODO: Make controllable from userland
 log_help.configure(
+    filename=( os.getenv('WALE_LOGFILE_PATH') or '/var/log/wal-e/rotating_log.out' ),
     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
 
 logger = log_help.WalELogger('wal_e.main', level=logging.INFO)
